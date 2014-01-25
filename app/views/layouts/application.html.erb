@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Daladamson</title>
+  <title>dal adamson</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+<p><%= link_to "View Blog", blog_path %> </p>
+<p><%= link_to "View Portfolio", folio_path %> </p>
 <%= yield %>
 
 </body>
