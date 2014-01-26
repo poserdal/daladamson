@@ -1,0 +1,26 @@
+<nav class="navbar navbar-default" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "DMA", root_path, class: "navbar-brand" %>
+    </div>
+  <div class="container"> <!--contains navbar links to keep them away from the far side of the page; does not include the "brand", so the brand stays at the far left-->
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "home", root_path %></li>
+        <li><%= link_to "read", blog_path %></li>
+        <li><%= link_to "see", folio_path %></li> 
+        <li><%= link_to "sleuth", about_path %></li> 
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div> <!--/.container for navbar links-->
+</nav>
