@@ -10,4 +10,8 @@ class PagesController < ApplicationController
   
   def folio
   end
+
+  def daladmin
+  end
+
 end

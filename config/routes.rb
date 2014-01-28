@@ -1,9 +1,12 @@
 Daladamson::Application.routes.draw do
+  resources :posts
+
+  devise_for :users
   root "pages#home"
   get "blog" => "pages#blog" #blog path
   get "about" => "pages#about" #about path
   get "folio" => "pages#folio" #portfolio path
-  
+  get "daladmin" => "pages#daladmin" #admin path
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
