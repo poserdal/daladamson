@@ -54,8 +54,8 @@ class PostsController < ApplicationController
 
     # Makes sure users can't delete an other's post
     def correct_user
-      @pin = current_user.pins.find_by(id: params[:id])
-      redirect_to pins_path, notice: "Not authorized to edit this pin" if @pin.nil?
+      @post = current_user.post.find_by(id: params[:id])
+      redirect_to post_path, notice: "Not authorized to edit this pin" if @post.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
