@@ -3,9 +3,11 @@
 <table>
   <thead>
     <tr>
+      <th>Image</th>
       <th>Title</th>
       <th>Body</th>
-      <th>Published</th>
+      <th>User</th>
+      <th>Published</th> 
       <th></th>
       <th></th>
       <th></th>
@@ -15,12 +17,16 @@
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= post.title %></td>
-        <td><%= post.body %></td>
-        <td><%= post.published %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Hold on there Cowboy, You Sure?' } %></td>
+          <td><%= image_tag post.image.url(:medium) %></td>
+          <td><%= post.title %></td>
+          <td><%= post.body %></td>
+          <td><%= post.user.email if post.user %></td>
+          <td><%= post.published %></td>
+          <td><%= link_to 'Show', post %></td>
+        <% if post.user == current_user %>
+          <td><%= link_to 'Edit', edit_post_path(post) %></td>
+          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Hold on there Cowboy, You Sure?' } %></td>
+        <% end %> <!--only show edit/destroy for "Current User" need to change to Admin User-->
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +34,6 @@
 
 <br>
 
-<%= link_to 'New Post', new_post_path %>
+<% if user_signed_in? %>
+  <%= link_to 'New Post', new_post_path %>
+<% end %>

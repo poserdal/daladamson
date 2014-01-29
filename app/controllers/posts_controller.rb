@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
 
   def index
@@ -12,7 +13,7 @@ class PostsController < ApplicationController
 
 
   def new
-    @post = Post.new
+    @post =  current_user.post.build
   end
 
 
@@ -21,9 +22,7 @@ class PostsController < ApplicationController
 
 
   def create
-    @post = Post.new(post_params)
-
-
+    @post = current_user.post.build(post_params)
     if @post.save
       redirect_to @post, notice: 'Post was successfully created.'
     else
@@ -53,8 +52,14 @@ class PostsController < ApplicationController
       @post = Post.find(params[:id])
     end
 
+    # Makes sure users can't delete an other's post
+    def correct_user
+      @pin = current_user.pins.find_by(id: params[:id])
+      redirect_to pins_path, notice: "Not authorized to edit this pin" if @pin.nil?
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :body, :published)
+      params.require(:post).permit(:title, :image, :body, :published)
     end
 end
