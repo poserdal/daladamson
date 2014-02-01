@@ -13,7 +13,7 @@ class PostsController < ApplicationController
 
 
   def new
-    @post =  current_user.posts.build
+    @post =  current_user.post.build
   end
 
 
@@ -22,7 +22,7 @@ class PostsController < ApplicationController
 
 
   def create
-    @post = current_user.posts.build(post_params)
+    @post = current_user.post.build(post_params)
     if @post.save
       redirect_to @post, notice: 'YO! Your post was successfully created!'
     else
@@ -54,8 +54,8 @@ class PostsController < ApplicationController
 
     # Makes sure users can't delete an other's post
     def correct_user
-      @post = current_user.posts.find_by(id: params[:id])
-      redirect_to posts_path, notice: "Sorry dude, you're not authorized to edit this pin" if @post.nil?
+      @post = current_user.post.find_by(id: params[:id])
+      redirect_to post_path, notice: "Sorry dude, you're not authorized to edit this pin" if @post.nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

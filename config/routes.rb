@@ -3,7 +3,7 @@ Daladamson::Application.routes.draw do
 
   devise_for :users
   root "pages#home"
-  get "blog" => "pages#blog" #blog path
+  get "blog" => "posts#index" #blog path
   get "about" => "pages#about" #about path
   get "folio" => "pages#folio" #portfolio path
   get "daladmin" => "pages#daladmin" #admin path

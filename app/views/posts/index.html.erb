@@ -1,39 +1,24 @@
-<h1>The Blog</h1>
+<%= render 'pages/blog' %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Title</th>
-      <th>Body</th>
-      <th>User</th>
-      <th>Published</th> 
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-          <td><%= image_tag post.image.url(:medium) %></td>
-          <td><%= post.title %></td>
-          <td><%= post.body %></td>
-          <td><%= post.user.email if post.user %></td>
-          <td><%= post.published %></td>
-          <td><%= link_to 'Show', post %></td>
+<div id="posts" class="transitions-enabled">
+  <% @posts.each do |post| %>
+    <div class="box panel panel-default">
+      <%= image_tag post.image.url(:medium) %>
+      <div class="panel panel-footer">
+        <%= post.title %>
+      </div>
+      <div class="panel panel-body">
+        <%= post.body %>
+        <%= post.user.email if post.user %>
+      </div>
+      <div class="panel panel-footer">
+        <%= post.published %>
+        <%= link_to 'Show', post %>
         <% if post.user == current_user %>
-          <td><%= link_to 'Edit', edit_post_path(post) %></td>
-          <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Hold on there Cowboy, You Sure?' } %></td>
+          <%= link_to 'Edit', edit_post_path(post) %>
+          <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Hold on there Cowboy, You Sure?' } %>
         <% end %> <!--only show edit/destroy for "Current User" need to change to Admin User-->
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<% if user_signed_in? %>
-  <%= link_to 'New Post', new_post_path %>
-<% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
